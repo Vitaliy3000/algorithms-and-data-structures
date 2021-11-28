@@ -1,10 +1,19 @@
 import import_ipynb
-from algorithms_and_data_structures import LinkedList
+from algorithms_and_data_structures import LinkedListOnNode
+from algorithms_and_data_structures import LinkedListOnNestedList
 from itertools import permutations
 from mock import Mock
+import pytest
 
 
-def test_LinkedList():
+@pytest.mark.parametrize(
+    "LinkedList",
+    [
+        LinkedListOnNestedList,
+        LinkedListOnNode,
+    ]
+)
+def test_LinkedList(LinkedList):
 
     # test insert/pop 1 object index = 0
     obj = Mock()
@@ -152,6 +161,13 @@ def test_LinkedList():
         linked_list.pop()
         assert len(linked_list) == 0
 
+    # test reverse 1 object
+    obj = Mock()
+    linked_list = LinkedList()
+    linked_list.insert(obj)
+    linked_list.reverse()
+    assert linked_list.pop() is obj
+
     # test reverse N objects
     N = 1000
     objs = [Mock() for _ in range(N)]
@@ -164,6 +180,30 @@ def test_LinkedList():
 
     for obj in objs:
         assert linked_list.pop() is obj
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
